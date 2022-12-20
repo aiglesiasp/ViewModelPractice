@@ -25,6 +25,17 @@ class MainActivity : AppCompatActivity() {
             numLiveData.observe(this@MainActivity) {
                 binding.tvTitle.text = it.toString()
             }
+
+            stateLiveData.observe(this@MainActivity) {
+                when(it) {
+                    is MainActivityViewModel.MainActivityState.Success -> {
+                        binding.tvTitle2.text = it.num.toString()
+                    }
+                    is MainActivityViewModel.MainActivityState.Error -> {
+                        binding.tvTitle2.text = it.message
+                    }
+                }
+            }
         }
     }
 
@@ -32,6 +43,9 @@ class MainActivity : AppCompatActivity() {
         with(binding) {
             tvTitle.setOnClickListener {
                 viewModel.cambiarNumeroLiveData()
+            }
+            tvTitle2.setOnClickListener {
+                viewModel.cambiarEstate()
             }
         }
     }

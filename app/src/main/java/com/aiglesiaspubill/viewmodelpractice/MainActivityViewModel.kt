@@ -12,6 +12,11 @@ class MainActivityViewModel: ViewModel() {
         MutableLiveData<Int>()
     }
 
+    val stateLiveData : MutableLiveData<MainActivityState> by lazy {
+        MutableLiveData<MainActivityState>()
+    }
+
+
     //LLAMADA A LA API
     fun cambiarNumero() {
         num = Random.nextInt()
@@ -20,4 +25,22 @@ class MainActivityViewModel: ViewModel() {
     fun cambiarNumeroLiveData() {
         numLiveData.value = Random.nextInt()
     }
+
+    fun cambiarEstate() {
+        //Si el numero e spositvo estado SUCCESS
+        //Si el numero es negativo el estado devuelve un ERROR
+        var num = Random.nextInt()
+        if(num>=0) {
+            stateLiveData.value = MainActivityState.Success(num)
+        }
+        else {
+            stateLiveData.value = MainActivityState.Error("Ha ocurrido un error")
+        }
+    }
+
+    sealed class MainActivityState {
+        data class Success(val num: Int) : MainActivityState()
+        data class Error(val message: String) : MainActivityState()
+    }
 }
+

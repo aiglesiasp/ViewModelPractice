@@ -27,6 +27,7 @@ class SecondActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val result = intent.getStringExtra(TAG_TEXT)
-        binding.tvTitle3.text = result
+        val numbers = Gson().fromJson(result, Numbers::class.java)
+        binding.tvTitle3.text = "Los numeros son : ${numbers.num1} y ${numbers.num2}"
     }
 }

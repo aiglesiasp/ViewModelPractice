@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.aiglesiaspubill.viewmodelpractice.databinding.ActivitySecondBinding
+import com.aiglesiaspubill.viewmodelpractice.model.Numbers
+import com.google.gson.Gson
 
 class SecondActivity : AppCompatActivity() {
 
@@ -12,9 +14,10 @@ class SecondActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG_TEXT = "TAG_TEXT"
-        fun launch (context: Context, text: String) {
+        fun launch (context: Context, numbers: Numbers) {
             val intent = Intent(context, SecondActivity::class.java)
-            intent.putExtra(TAG_TEXT, text)
+            val numbersInString = Gson().toJson(numbers)
+            intent.putExtra(TAG_TEXT, numbersInString)
             context.startActivity(intent)
         }
     }

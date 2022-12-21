@@ -2,6 +2,7 @@ package com.aiglesiaspubill.viewmodelpractice
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.aiglesiaspubill.viewmodelpractice.databinding.ActivityMainBinding
 
@@ -30,9 +31,14 @@ class MainActivity : AppCompatActivity() {
                 when(it) {
                     is MainActivityViewModel.MainActivityState.Success -> {
                         binding.tvTitle2.text = it.num.toString()
+                        binding.progressBar.visibility = View.INVISIBLE
                     }
                     is MainActivityViewModel.MainActivityState.Error -> {
                         binding.tvTitle2.text = it.message
+                        binding.progressBar.visibility = View.INVISIBLE
+                    }
+                    is MainActivityViewModel.MainActivityState.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
                     }
                 }
             }

@@ -2,6 +2,8 @@ package com.aiglesiaspubill.viewmodelpractice
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class MainActivityViewModel: ViewModel() {
@@ -29,6 +31,9 @@ class MainActivityViewModel: ViewModel() {
     fun cambiarEstate() {
         //Si el numero e spositvo estado SUCCESS
         //Si el numero es negativo el estado devuelve un ERROR
+
+        stateLiveData.value = MainActivityState.Loading
+
         var num = Random.nextInt()
         if(num>=0) {
             stateLiveData.value = MainActivityState.Success(num)
@@ -41,6 +46,7 @@ class MainActivityViewModel: ViewModel() {
     sealed class MainActivityState {
         data class Success(val num: Int) : MainActivityState()
         data class Error(val message: String) : MainActivityState()
+        object Loading : MainActivityState()
     }
 }
 

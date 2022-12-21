@@ -1,5 +1,6 @@
 package com.aiglesiaspubill.viewmodelpractice
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -52,6 +53,11 @@ class MainActivity : AppCompatActivity() {
             }
             tvTitle2.setOnClickListener {
                 viewModel.cambiarEstate()
+            }
+            btnNext.setOnClickListener {
+                //TODO: Llamar a la funcion cambiar de layout del boton
+                val intent = Intent(this@MainActivity, SecondActivity::class.java)
+                startActivity(intent)
             }
         }
     }

@@ -55,9 +55,7 @@ class MainActivity : AppCompatActivity() {
                 viewModel.cambiarEstate()
             }
             btnNext.setOnClickListener {
-                //TODO: Llamar a la funcion cambiar de layout del boton
-                val intent = Intent(this@MainActivity, SecondActivity::class.java)
-                startActivity(intent)
+                SecondActivity.launch(this@MainActivity,binding.tvTitle.text.toString())
             }
         }
     }
